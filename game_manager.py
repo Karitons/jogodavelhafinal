@@ -31,19 +31,14 @@ class GameManager:
         self.score_label = tk.Label(self.master, text="Placar: X - 0 | O - 0", font=('Arial', 18, 'bold'), pady=12, fg="#2C3E50")
         self.score_label.pack(side=tk.TOP) 
 
-        # Frame para seleção de modo
         mode_frame = tk.Frame(self.master, pady=10)
         mode_frame.pack(side=tk.TOP)
         tk.Label(mode_frame, text="Escolha o Modo:", font=('Arial', 12)).pack(side=tk.LEFT, padx=5)
         tk.Button(mode_frame, text="Jogador vs. Jogador", command=self.set_vs_player_mode, font=('Arial', 12), bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
         tk.Button(mode_frame, text="Jogador vs. IA", command=self._show_ai_difficulty_options, font=('Arial', 12), bg="#FFC107", fg="#2C3E50").pack(side=tk.LEFT, padx=5)
 
-        # Frame e botões de dificuldade da IA (inicialmente ocultos)
-        # Removi o height do ai_difficulty_frame diretamente, pois vamos forçar com um widget interno
         self.ai_difficulty_frame = tk.Frame(self.master, pady=5, bg="#F0F0F0", relief="groove", bd=2) 
         
-        # === MUDANÇA CRÍTICA FINAL AQUI: Adicionando um FRAME INTERNO INVISÍVEL PARA FORÇAR A ALTURA ===
-        # Este frame interno (spacer_frame) terá uma altura fixa e forçará o ai_difficulty_frame a se expandir.
         spacer_frame = tk.Frame(self.ai_difficulty_frame, height=40, width=1, bg="#F0F0F0") # Altura desejada
         spacer_frame.pack(side=tk.LEFT, fill=tk.Y, expand=False, padx=0, pady=0) # Pequeno dummy para forçar altura. Width=1 para ser pequeno.
 
@@ -54,11 +49,9 @@ class GameManager:
             tk.Button(self.ai_difficulty_frame, text=text, command=lambda d=diff_level: self.set_vs_ai_mode(d),
                       font=('Arial', 10), bg=colors[text]).pack(side=tk.LEFT, padx=3, pady=5)
         
-        # Empacota o frame de dificuldade e o esconde imediatamente para reservar seu lugar.
         self.ai_difficulty_frame.pack(side=tk.TOP, fill=tk.X, expand=False) 
         self.ai_difficulty_frame.pack_forget() 
         
-        # Frame para controle do jogo
         control_frame = tk.Frame(self.master, pady=15)
         control_frame.pack(side=tk.TOP)
         tk.Button(control_frame, text="Reiniciar Partida", command=self.reset_game, font=('Arial', 12), bg="#90CAF9", fg="black").pack(side=tk.LEFT, padx=10)
