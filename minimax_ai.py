@@ -21,13 +21,10 @@ class MinimaxAI:
         if difficulty == 'easy':
             return self._get_random_move(board)
         elif difficulty == 'medium':
-            # Tenta uma jogada boa, mas pode cometer erros (não é um minimax completo)
             return self._minimax_move_partial(board, 2) or self._get_random_move(board)
         elif difficulty == 'hard':
-            # Minimax com profundidade limitada para um desafio maior, mas não perfeito
             return self._minimax_move_partial(board, 4)
         elif difficulty == 'impossible':
-            # Minimax completo para a jogada ótima
             return self._minimax_move_full(board)
         return None
 
@@ -44,7 +41,6 @@ class MinimaxAI:
         best_score = -math.inf
         best_move = None
         
-        # Cria uma cópia do jogo da velha para simular
         temp_board = [row[:] for row in board]
 
         for r in range(3):
@@ -64,7 +60,6 @@ class MinimaxAI:
         best_score = -math.inf
         best_move = None
         
-        # Cria uma cópia do jogo da velha para simular
         temp_board = [row[:] for row in board]
 
         for r in range(3):
